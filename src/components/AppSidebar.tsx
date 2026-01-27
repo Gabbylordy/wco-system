@@ -13,41 +13,79 @@ import {
   Activity,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { LogOut } from "lucide-react";
+import { useAuth } from "@/auth/AuthContext";
+import { useNavigate } from "react-router-dom";
+
+
+
+// const navItems = [
+//   {
+//     title: "Command Center",
+//     url: "/",
+//     icon: LayoutDashboard,
+//     description: "Overview dashboard",
+//   },
+//   {
+//     title: "Revenue Assurance",
+//     url: "/revenue",
+//     icon: DollarSign,
+//     description: "Valuation & PAAR anomalies",
+//     accent: "module-revenue",
+//   },
+//   {
+//     title: "Society Protection",
+//     url: "/society",
+//     icon: Shield,
+//     description: "Illicit goods radar",
+//     accent: "module-society",
+//   },
+//   {
+//     title: "Integrity Analytics",
+//     url: "/integrity",
+//     icon: UserCheck,
+//     description: "Insider threat detection",
+//     accent: "module-integrity",
+//   },
+//   {
+//     title: "Risk Rules Studio",
+//     url: "/rules",
+//     icon: Sliders,
+//     description: "Dynamic rule management",
+//     accent: "module-agility",
+//   },
+// ];
 
 const navItems = [
   {
     title: "Command Center",
     url: "/",
     icon: LayoutDashboard,
-    description: "Overview dashboard",
+    roles: ["Risk Officer"],
   },
   {
     title: "Revenue Assurance",
     url: "/revenue",
     icon: DollarSign,
-    description: "Valuation & PAAR anomalies",
-    accent: "module-revenue",
+    roles: ["Risk Officer"],
   },
   {
     title: "Society Protection",
     url: "/society",
     icon: Shield,
-    description: "Illicit goods radar",
-    accent: "module-society",
+    roles: ["Risk Officer"],
   },
   {
     title: "Integrity Analytics",
     url: "/integrity",
     icon: UserCheck,
-    description: "Insider threat detection",
-    accent: "module-integrity",
+    roles: ["Risk Officer"],
   },
   {
     title: "Risk Rules Studio",
     url: "/rules",
     icon: Sliders,
-    description: "Dynamic rule management",
-    accent: "module-agility",
+    roles: ["Admin"], // future use
   },
 ];
 
@@ -59,6 +97,15 @@ const bottomItems = [
 export function AppSidebar() {
   const [collapsed, setCollapsed] = useState(false);
   const location = useLocation();
+  const { user, logout } = useAuth();
+  const navigate = useNavigate();
+
+
+  const handleLogout = () => {
+    logout();
+    navigate("/login", { replace: true });
+  };
+
 
   return (
     <aside
@@ -71,11 +118,14 @@ export function AppSidebar() {
       <div className="h-16 flex items-center justify-between px-4 border-b border-sidebar-border">
         {!collapsed && (
           <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary to-module-revenue flex items-center justify-center">
+            {/* <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary to-module-revenue flex items-center justify-center">
               <Activity className="h-5 w-5 text-primary-foreground" />
+            </div> */}
+            <div>
+              <img src="/wco_logo-1.png" alt="WCO Logo" className="h-8 w-8" />
             </div>
             <div>
-              <h1 className="font-bold text-sidebar-foreground tracking-tight">VARIS</h1>
+              <h1 className="font-bold text-sidebar-foreground tracking-tight">WCO</h1>
               <p className="text-[10px] text-muted-foreground -mt-0.5">Risk Intelligence</p>
             </div>
           </div>
@@ -90,40 +140,45 @@ export function AppSidebar() {
 
       {/* Main Navigation */}
       <nav className="flex-1 py-4 px-2 space-y-1 overflow-y-auto">
-        {navItems.map((item) => {
-          const isActive = location.pathname === item.url;
-          return (
-            <NavLink
-              key={item.url}
-              to={item.url}
-              className={cn(
-                "flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200",
-                "hover:bg-sidebar-accent group",
-                isActive && "bg-sidebar-accent text-sidebar-accent-foreground",
-                !isActive && "text-sidebar-foreground"
-              )}
-            >
-              <item.icon
+        {/* {navItems.map((item) => {
+          const isActive = location.pathname === item.url; */}
+        {navItems
+          .filter((item) => !item.roles || item.roles.includes(user?.role!))
+          .map((item) => {
+            const isActive = location.pathname === item.url;
+
+            return (
+              <NavLink
+                key={item.url}
+                to={item.url}
                 className={cn(
-                  "h-5 w-5 shrink-0 transition-colors",
-                  isActive && item.accent && `text-${item.accent}`,
-                  !isActive && "text-muted-foreground group-hover:text-foreground"
+                  "flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200",
+                  "hover:bg-sidebar-accent group",
+                  isActive && "bg-sidebar-accent text-sidebar-accent-foreground",
+                  !isActive && "text-sidebar-foreground"
                 )}
-              />
-              {!collapsed && (
-                <div className="min-w-0">
-                  <p className="text-sm font-medium truncate">{item.title}</p>
-                  {item.description && (
-                    <p className="text-[10px] text-muted-foreground truncate">{item.description}</p>
+              >
+                <item.icon
+                  className={cn(
+                    "h-5 w-5 shrink-0 transition-colors",
+                    isActive && item.accent && `text-${item.accent}`,
+                    !isActive && "text-muted-foreground group-hover:text-foreground"
                   )}
-                </div>
-              )}
-              {isActive && !collapsed && (
-                <div className="ml-auto w-1.5 h-1.5 rounded-full bg-primary" />
-              )}
-            </NavLink>
-          );
-        })}
+                />
+                {!collapsed && (
+                  <div className="min-w-0">
+                    <p className="text-sm font-medium truncate">{item.title}</p>
+                    {item.description && (
+                      <p className="text-[10px] text-muted-foreground truncate">{item.description}</p>
+                    )}
+                  </div>
+                )}
+                {isActive && !collapsed && (
+                  <div className="ml-auto w-1.5 h-1.5 rounded-full bg-primary" />
+                )}
+              </NavLink>
+            );
+          })}
       </nav>
 
       {/* Bottom Navigation */}
@@ -149,7 +204,7 @@ export function AppSidebar() {
       </div>
 
       {/* User */}
-      {!collapsed && (
+      {/* {!collapsed && (
         <div className="p-4 border-t border-sidebar-border">
           <div className="flex items-center gap-3">
             <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center">
@@ -161,7 +216,41 @@ export function AppSidebar() {
             </div>
           </div>
         </div>
+      )} */}
+
+      {/* User */}
+      {!collapsed && user && (
+        <div className="p-4 border-t border-sidebar-border space-y-3">
+          <div className="flex items-center gap-3">
+            <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center">
+              <span className="text-xs font-medium text-primary">
+                {user.username.slice(0, 2).toUpperCase()}
+              </span>
+            </div>
+            <div className="min-w-0">
+              <p className="text-sm font-medium truncate">{user.role}</p>
+              <p className="text-[10px] text-muted-foreground">Apapa Command</p>
+            </div>
+          </div>
+
+          {/* <button
+            onClick={logout}
+            className="flex items-center gap-2 w-full rounded-lg px-3 py-2 text-xs text-muted-foreground hover:bg-sidebar-accent hover:text-foreground transition"
+          >
+            <LogOut className="h-4 w-4" />
+            Logout
+          </button> */}
+          <button
+            onClick={handleLogout}
+            className="flex items-center gap-2 w-full rounded-lg px-3 py-2 text-xs text-muted-foreground hover:bg-sidebar-accent hover:text-foreground transition"
+          >
+            <LogOut className="h-4 w-4" />
+            Logout
+          </button>
+
+        </div>
       )}
+
     </aside>
   );
 }

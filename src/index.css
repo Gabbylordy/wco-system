@@ -2,88 +2,72 @@
 @tailwind components;
 @tailwind utilities;
 
-/* VARIS Design System - Command Center Aesthetic */
+/*  Design System - Command Center Aesthetic */
 
 @layer base {
   :root {
-    /* Core backgrounds - deep slate for authority */
-    --background: 222 47% 11%;
-    --foreground: 210 40% 98%;
+    /* Core backgrounds - clean white */
+    --background: 0 0% 100%;
+    --foreground: 222 47% 11%;
 
-    /* Card surfaces - elevated glass effect */
-    --card: 222 47% 14%;
-    --card-foreground: 210 40% 98%;
+    /* Card surfaces */
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
 
-    --popover: 222 47% 16%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
 
-    /* Primary - confident blue */
+    /* Primary - confident blue (keep this) */
     --primary: 217 91% 60%;
-    --primary-foreground: 222 47% 11%;
+    --primary-foreground: 0 0% 100%;
 
-    /* Secondary - muted slate */
-    --secondary: 217 33% 22%;
-    --secondary-foreground: 210 40% 98%;
+    /* Secondary - light gray */
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222 47% 11%;
 
     /* Muted surfaces */
-    --muted: 217 33% 17%;
-    --muted-foreground: 215 20% 65%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215 20% 45%;
 
-    /* Accent - subtle glow */
+    /* Accent */
     --accent: 217 91% 60%;
-    --accent-foreground: 210 40% 98%;
+    --accent-foreground: 0 0% 100%;
 
-    /* Semantic risk colors */
+    /* Semantic colors */
     --destructive: 0 84% 60%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 0 0% 100%;
 
     --success: 142 76% 36%;
-    --success-foreground: 210 40% 98%;
+    --success-foreground: 0 0% 100%;
 
     --warning: 38 92% 50%;
     --warning-foreground: 222 47% 11%;
 
     --info: 199 89% 48%;
-    --info-foreground: 222 47% 11%;
-
-    /* Risk severity scale */
-    --risk-low: 142 76% 36%;
-    --risk-medium: 38 92% 50%;
-    --risk-high: 0 84% 60%;
-    --risk-critical: 0 91% 45%;
-
-    /* Module accent colors */
-    --module-revenue: 262 83% 58%;
-    --module-society: 199 89% 48%;
-    --module-integrity: 38 92% 50%;
-    --module-agility: 142 76% 36%;
+    --info-foreground: 0 0% 100%;
 
     /* Borders and inputs */
-    --border: 217 33% 22%;
-    --input: 217 33% 22%;
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
     --ring: 217 91% 60%;
 
     --radius: 0.75rem;
 
-    /* Sidebar */
-    --sidebar-background: 222 47% 9%;
-    --sidebar-foreground: 215 20% 75%;
+    /* Sidebar (light) */
+    --sidebar-background: 210 40% 98%;
+    --sidebar-foreground: 222 47% 11%;
     --sidebar-primary: 217 91% 60%;
-    --sidebar-primary-foreground: 222 47% 11%;
-    --sidebar-accent: 217 33% 17%;
-    --sidebar-accent-foreground: 210 40% 98%;
-    --sidebar-border: 217 33% 17%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 210 40% 96%;
+    --sidebar-accent-foreground: 222 47% 11%;
+    --sidebar-border: 214 32% 91%;
     --sidebar-ring: 217 91% 60%;
 
-    /* Custom gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(217 91% 60%), hsl(262 83% 58%));
-    --gradient-card: linear-gradient(180deg, hsl(222 47% 16%), hsl(222 47% 12%));
-    --gradient-glow: radial-gradient(ellipse at center, hsl(217 91% 60% / 0.15), transparent 70%);
-
-    /* Shadows */
-    --shadow-card: 0 4px 24px -4px hsl(222 47% 5% / 0.5);
-    --shadow-glow: 0 0 40px -8px hsl(217 91% 60% / 0.3);
+    /* Shadows (lighter) */
+    --shadow-card: 0 4px 24px -6px hsl(222 47% 11% / 0.1);
+    --shadow-glow: 0 0 32px -8px hsl(217 91% 60% / 0.25);
   }
+
 
   .dark {
     /* Same as root - dark by default */

@@ -1,4 +1,4 @@
-// VARIS Mock Data - Synthetic dataset for hackathon demo
+// WCO Mock Data - Synthetic dataset for hackathon demo
 
 export interface Consignment {
   id: string;

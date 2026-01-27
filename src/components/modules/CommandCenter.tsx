@@ -28,7 +28,7 @@ export function CommandCenter() {
     <div className="flex flex-col h-full">
       <DashboardHeader 
         title="Command Center" 
-        subtitle="VARIS — Vigilant Agile Risk & Integrity Suite"
+        subtitle="WCO — Vigilant Agile Risk & Integrity Suite"
       />
       
       <div className="flex-1 p-6 overflow-auto">
