@@ -7,62 +7,33 @@ import {
   UserCheck,
   Sliders,
   Bell,
+  Brain,
   Settings,
   ChevronLeft,
   ChevronRight,
   Activity,
+  Package,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { LogOut } from "lucide-react";
 import { useAuth } from "@/auth/AuthContext";
 import { useNavigate } from "react-router-dom";
-
-
-
-// const navItems = [
-//   {
-//     title: "Command Center",
-//     url: "/",
-//     icon: LayoutDashboard,
-//     description: "Overview dashboard",
-//   },
-//   {
-//     title: "Revenue Assurance",
-//     url: "/revenue",
-//     icon: DollarSign,
-//     description: "Valuation & PAAR anomalies",
-//     accent: "module-revenue",
-//   },
-//   {
-//     title: "Society Protection",
-//     url: "/society",
-//     icon: Shield,
-//     description: "Illicit goods radar",
-//     accent: "module-society",
-//   },
-//   {
-//     title: "Integrity Analytics",
-//     url: "/integrity",
-//     icon: UserCheck,
-//     description: "Insider threat detection",
-//     accent: "module-integrity",
-//   },
-//   {
-//     title: "Risk Rules Studio",
-//     url: "/rules",
-//     icon: Sliders,
-//     description: "Dynamic rule management",
-//     accent: "module-agility",
-//   },
-// ];
+import WcoLogo from "@/assets/wco_logo-1.png";
 
 const navItems = [
+  // {
+  //   title: "Command Center",
+  //   url: "/",
+  //   icon: LayoutDashboard,
+  //   roles: ["Risk Officer"],
+  // },
   {
     title: "Command Center",
-    url: "/",
+    url: "/dashboard",
     icon: LayoutDashboard,
     roles: ["Risk Officer"],
   },
+
   {
     title: "Revenue Assurance",
     url: "/revenue",
@@ -82,10 +53,25 @@ const navItems = [
     roles: ["Risk Officer"],
   },
   {
+    title: "Parcel Intelligence",
+    url: "/parcel-intel",
+    icon: Package,
+    roles: ["Risk Officer", "Admin"],
+    description: "E-commerce parcel analytics"
+  },
+  {
+    title: "AI Intelligence",
+    url: "/ai-intelligence",
+    icon: Brain,
+    roles: ["Risk Officer", "Admin"],
+    description: "Advanced AI insights",
+    accent: "purple"
+  },
+  {
     title: "Risk Rules Studio",
     url: "/rules",
     icon: Sliders,
-    roles: ["Admin"], // future use
+    roles: ["Admin"], // forfuture use
   },
 ];
 
@@ -118,11 +104,12 @@ export function AppSidebar() {
       <div className="h-16 flex items-center justify-between px-4 border-b border-sidebar-border">
         {!collapsed && (
           <div className="flex items-center gap-2">
-            {/* <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary to-module-revenue flex items-center justify-center">
-              <Activity className="h-5 w-5 text-primary-foreground" />
-            </div> */}
             <div>
-              <img src="/wco_logo-1.png" alt="WCO Logo" className="h-8 w-8" />
+              <img
+                src={WcoLogo}
+                alt="WCO Logo"
+                className="h-8 w-8"
+              />
             </div>
             <div>
               <h1 className="font-bold text-sidebar-foreground tracking-tight">WCO</h1>
@@ -204,21 +191,6 @@ export function AppSidebar() {
       </div>
 
       {/* User */}
-      {/* {!collapsed && (
-        <div className="p-4 border-t border-sidebar-border">
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center">
-              <span className="text-xs font-medium text-primary">RO</span>
-            </div>
-            <div className="min-w-0">
-              <p className="text-sm font-medium truncate">Risk Officer</p>
-              <p className="text-[10px] text-muted-foreground">Apapa Command</p>
-            </div>
-          </div>
-        </div>
-      )} */}
-
-      {/* User */}
       {!collapsed && user && (
         <div className="p-4 border-t border-sidebar-border space-y-3">
           <div className="flex items-center gap-3">
@@ -232,14 +204,6 @@ export function AppSidebar() {
               <p className="text-[10px] text-muted-foreground">Apapa Command</p>
             </div>
           </div>
-
-          {/* <button
-            onClick={logout}
-            className="flex items-center gap-2 w-full rounded-lg px-3 py-2 text-xs text-muted-foreground hover:bg-sidebar-accent hover:text-foreground transition"
-          >
-            <LogOut className="h-4 w-4" />
-            Logout
-          </button> */}
           <button
             onClick={handleLogout}
             className="flex items-center gap-2 w-full rounded-lg px-3 py-2 text-xs text-muted-foreground hover:bg-sidebar-accent hover:text-foreground transition"

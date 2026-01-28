@@ -2,8 +2,9 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 
 type User = {
   username: string;
-  role: "Risk Officer";
+  role: "Risk Officer" | "Admin";
 };
+
 
 type AuthContextType = {
   user: User | null;
@@ -21,16 +22,35 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     if (storedUser) setUser(JSON.parse(storedUser));
   }, []);
 
+  // const login = async (username: string, password: string) => {
+  //   // default credential
+  //   if (username === "riskofficer" && password === "risk123") {
+  //     const userData: User = { username, role: "Risk Officer" };
+  //     setUser(userData);
+  //     localStorage.setItem("varis_user", JSON.stringify(userData));
+  //     return true;
+  //   }
+  //   return false;
+  // };
+
   const login = async (username: string, password: string) => {
-    // default credential
-    if (username === "riskofficer" && password === "risk123") {
-      const userData: User = { username, role: "Risk Officer" };
-      setUser(userData);
-      localStorage.setItem("varis_user", JSON.stringify(userData));
-      return true;
-    }
-    return false;
-  };
+  if (username === "riskofficer" && password === "risk123") {
+    const userData: User = { username, role: "Risk Officer" };
+    setUser(userData);
+    localStorage.setItem("varis_user", JSON.stringify(userData));
+    return true;
+  }
+
+  if (username === "admin" && password === "admin123") {
+    const userData: User = { username, role: "Admin" };
+    setUser(userData);
+    localStorage.setItem("varis_user", JSON.stringify(userData));
+    return true;
+  }
+
+  return false;
+};
+
 
   const logout = () => {
     setUser(null);

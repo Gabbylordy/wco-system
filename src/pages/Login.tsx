@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/auth/AuthContext";
+import WcoLogo from "@/assets/wco_logo-1.png";
 
 const Login = () => {
   const { login } = useAuth();
@@ -28,7 +29,7 @@ const Login = () => {
         {/* Logo */}
         <div className="flex flex-col items-center mb-6">
           <img
-            src="/wco_logo-1.png"
+            src={WcoLogo}
             alt="WCO Logo"
             className="h-14 mb-3"
           />

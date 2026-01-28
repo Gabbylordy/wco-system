@@ -1,8 +1,78 @@
-import { Toaster } from "@/components/ui/toaster";
-import { Toaster as Sonner } from "@/components/ui/sonner";
+// import { Toaster } from "@/components/ui/toaster";
+// import { Toaster as Sonner } from "@/components/ui/sonner";
+// import { TooltipProvider } from "@/components/ui/tooltip";
+// import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+// // import { BrowserRouter, Routes, Route } from "react-router-dom";
+// import { HashRouter, Routes, Route } from "react-router-dom";
+// import { DashboardLayout } from "@/layouts/DashboardLayout";
+// import { AuthProvider } from "@/auth/AuthContext";
+// import { ProtectedRoute } from "@/auth/ProtectedRoute";
+
+// import Login from "./pages/Login";
+// import Index from "./pages/Index";
+// import RevenuePage from "./pages/RevenuePage";
+// import SocietyPage from "./pages/SocietyPage";
+// import IntegrityPage from "./pages/IntegrityPage";
+// import ParcelIntelPage from "./pages/ParcelIntelPage";
+// import RulesPage from "./pages/RulesPage";
+// import NotFound from "./pages/NotFound";
+// import Landing from "./pages/Landing";
+
+
+// const queryClient = new QueryClient();
+
+// const App = () => (
+//   <QueryClientProvider client={queryClient}>
+//     <AuthProvider>
+//       <TooltipProvider>
+//         {/* <Toaster /> */}
+//          {/* <Toaster position="top-right" /> */}
+//         {/* <Sonner /> */}
+//         <Sonner position="top-right" />
+//         {/* <BrowserRouter> */}
+//         <HashRouter>
+//           <Routes>
+//             {/* Public */}
+//             <Route path="/" element={<Landing />} />
+//             <Route path="/login" element={<Login />} />
+
+//             {/* Protected – Risk Officer */}
+//             <Route element={<ProtectedRoute roles={["Risk Officer"]} />}>
+//               <Route element={<DashboardLayout />}>
+//                 <Route path="/dashboard" element={<Index />} />
+//                 <Route path="/revenue" element={<RevenuePage />} />
+//                 <Route path="/society" element={<SocietyPage />} />
+//                 <Route path="/integrity" element={<IntegrityPage />} />
+//                 <Route path="/parcel-intel" element={<ParcelIntelPage />} />
+//               </Route>
+//             </Route>
+
+//             {/* Protected – Admin only */}
+//             <Route element={<ProtectedRoute roles={["Admin"]} />}>
+//               <Route element={<DashboardLayout />}>
+//                 <Route path="/rules" element={<RulesPage />} />
+//               </Route>
+//             </Route>
+
+//             {/* Fallback */}
+//             <Route path="*" element={<NotFound />} />
+//           </Routes>
+//         {/* </BrowserRouter> */}
+//         </HashRouter>
+
+//       </TooltipProvider>
+//     </AuthProvider>
+//   </QueryClientProvider>
+// );
+
+// export default App;
+
+
+
+import { Toaster } from "sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HashRouter, Routes, Route } from "react-router-dom";
 import { DashboardLayout } from "@/layouts/DashboardLayout";
 import { AuthProvider } from "@/auth/AuthContext";
 import { ProtectedRoute } from "@/auth/ProtectedRoute";
@@ -12,10 +82,11 @@ import Index from "./pages/Index";
 import RevenuePage from "./pages/RevenuePage";
 import SocietyPage from "./pages/SocietyPage";
 import IntegrityPage from "./pages/IntegrityPage";
+import ParcelIntelPage from "./pages/ParcelIntelPage";
 import RulesPage from "./pages/RulesPage";
 import NotFound from "./pages/NotFound";
 import Landing from "./pages/Landing";
-
+import AIIntelligencePage from "./pages/AIIntelligencePage";
 
 const queryClient = new QueryClient();
 
@@ -23,29 +94,10 @@ const App = () => (
   <QueryClientProvider client={queryClient}>
     <AuthProvider>
       <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          {/* <Routes>
-            <Route path="/login" element={<Login />} />
-
-            <Route
-              element={
-                <ProtectedRoute>
-                  <DashboardLayout />
-                </ProtectedRoute>
-              }
-            >
-              <Route path="/" element={<Index />} />
-              <Route path="/revenue" element={<RevenuePage />} />
-              <Route path="/society" element={<SocietyPage />} />
-              <Route path="/integrity" element={<IntegrityPage />} />
-              <Route path="/rules" element={<RulesPage />} />
-            </Route>
-
-            <Route path="*" element={<NotFound />} />
-          </Routes> */}
-
+        {/* Use Toaster directly from sonner with position prop */}
+        <Toaster position="top-right" />
+        
+        <HashRouter>
           <Routes>
             {/* Public */}
             <Route path="/" element={<Landing />} />
@@ -58,6 +110,8 @@ const App = () => (
                 <Route path="/revenue" element={<RevenuePage />} />
                 <Route path="/society" element={<SocietyPage />} />
                 <Route path="/integrity" element={<IntegrityPage />} />
+                <Route path="/parcel-intel" element={<ParcelIntelPage />} />
+                 <Route path="/ai-intelligence" element={<AIIntelligencePage />} />
               </Route>
             </Route>
 
@@ -71,8 +125,7 @@ const App = () => (
             {/* Fallback */}
             <Route path="*" element={<NotFound />} />
           </Routes>
-        </BrowserRouter>
-
+        </HashRouter>
       </TooltipProvider>
     </AuthProvider>
   </QueryClientProvider>
